@@ -8,3 +8,17 @@ Entity::Entity(int hp, int age, float x, float y, const string& texture_name){
     sprite.setTexture(texture);
     sprite.setPosition(position.first, position.second);
 }
+
+void Entity::reset_position() {
+    if (position.first < 0){
+        position.first = 0;
+    } else if (position.first > WINDOW_WIDTH){
+        position.first = WINDOW_WIDTH;
+    }
+    if (position.second < 0){
+        position.second = 0;
+    } else if (position.second > WINDOW_HEIGHT){
+        position.second = WINDOW_HEIGHT;
+    }
+    sprite.setPosition(position.first, position.second);
+}

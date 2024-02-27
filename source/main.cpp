@@ -2,8 +2,6 @@
 #include "field.h"
 #include "entity.h"
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 800
 #define WINDOW_TITLE "Best Game"
 #define FPS 10
 
@@ -24,19 +22,21 @@ int main() {
 
     sf::Texture polar_bear;
     polar_bear.loadFromFile("../textures/polar_bear.png");
-
-    sf::Texture wolf;
-    wolf.loadFromFile("../textures/wolf.png");
+    
 
     window.setFramerateLimit(FPS);
 
     Entity cow(1, 1, 100, 120, "cow.png");
     Entity pig(1, 1, 100, 120, "pig.png");
+    Entity wolf(1, 1, 100, 120, "wolf.png");
     
     cow.sprite.setScale(
             entitySize.x / spriteBG.getLocalBounds().width,
             entitySize.y / spriteBG.getLocalBounds().height);
     pig.sprite.setScale(
+            entitySize.x / spriteBG.getLocalBounds().width,
+            entitySize.y / spriteBG.getLocalBounds().height);
+    wolf.sprite.setScale(
             entitySize.x / spriteBG.getLocalBounds().width,
             entitySize.y / spriteBG.getLocalBounds().height);
 
@@ -51,12 +51,21 @@ int main() {
         window.draw(spriteBG);
         
 
-        cow.position.first = rand() % 10 - 5 + cow.position.first;
-        cow.position.second = rand() % 10 - 5 + cow.position.second;
+        cow.position.first = rand() % 20 - 10 + cow.position.first;
+        cow.position.second = rand() % 20 - 10 + cow.position.second;
         cow.reset_position();
+
+        pig.position.first = (rand() % 20) - 10 + pig.position.first;
+        pig.position.second = (rand() % 20) - 10 + pig.position.second;
+        pig.reset_position();
+
+        wolf.position.first = (rand() % 20) - 10 + wolf.position.first;
+        wolf.position.second = (rand() % 20) - 10 + wolf.position.second;
+        wolf.reset_position();
 
         window.draw(cow.sprite);
         window.draw(pig.sprite);
+        window.draw(wolf.sprite);
 
         window.display();
     }

@@ -4,6 +4,9 @@
 #include <SFML/Graphics.hpp>
 using namespace std;
 
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 800
+
 class Entity {
 public:
     int hp;
@@ -13,7 +16,5 @@ public:
     sf::Sprite sprite;
     Entity(int hp, int age, float x, float y, const string& texture_name);
 
-    void reset_position(){
-        sprite.setPosition(position.first, position.second);
-    }
+    void reset_position();
 };
