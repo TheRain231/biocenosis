@@ -2,7 +2,11 @@ cmake_minimum_required(VERSION 3.14)
 project(Biocenosis)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-set(SOURCE_FILES source/main.cpp)
+set(SOURCE_FILES source/main.cpp
+        source/field.h
+        source/field.cpp
+        source/entity.h
+        source/entity.cpp)
 add_executable(Biocenosis ${SOURCE_FILES})
 
 # Добавление textures
