@@ -1,13 +1,15 @@
 #include <SFML/Graphics.hpp>
 #include "field.h"
 #include "entity.h"
-#include "defines.h"
 
+#define WINDOW_TITLE "Best Game"
+#define FPS 10
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
 
-    sf::Vector2f bgSize(WINDOW_HEIGHT, WINDOW_WIDTH);
+    sf::Vector2f bgSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+    sf::Vector2f entitySize(WINDOW_WIDTH / FIELD_WIDTH, WINDOW_HEIGHT / FIELD_HEIGHT);
 
     sf::Texture background;
     background.loadFromFile("textures/background.png");
@@ -17,11 +19,39 @@ int main() {
     spriteBG.setScale(
             bgSize.x / spriteBG.getLocalBounds().width,
             bgSize.y / spriteBG.getLocalBounds().height);
+
+    sf::Texture Rain1;
+    Rain1.loadFromFile("../textures/rain.png");
+    sf::RectangleShape RainBackground1(sf::Vector2f(WINDOW_WIDTH,WINDOW_HEIGHT));
+    RainBackground1.setTexture(&Rain1);
+    RainBackground1.setPosition(0,0);
+
+    sf::Texture Rain2;
+    Rain2.loadFromFile("../textures/rain.png");
+    sf::RectangleShape RainBackground2(sf::Vector2f(WINDOW_WIDTH,WINDOW_HEIGHT));
+    RainBackground2.setTexture(&Rain2);
+    RainBackground1.setPosition(0,-WINDOW_HEIGHT);
+
+
+    sf::Texture polar_bear;
+    polar_bear.loadFromFile("../textures/polar_bear.png");
+    
+
     window.setFramerateLimit(FPS);
 
     Entity cow(1, 1, 100, 120, "cow.png");
     Entity pig(1, 1, 100, 120, "pig.png");
     Entity wolf(1, 1, 100, 120, "wolf.png");
+    
+    cow.sprite.setScale(
+            entitySize.x / spriteBG.getLocalBounds().width,
+            entitySize.y / spriteBG.getLocalBounds().height);
+    pig.sprite.setScale(
+            entitySize.x / spriteBG.getLocalBounds().width,
+            entitySize.y / spriteBG.getLocalBounds().height);
+    wolf.sprite.setScale(
+            entitySize.x / spriteBG.getLocalBounds().width,
+            entitySize.y / spriteBG.getLocalBounds().height);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -29,18 +59,40 @@ int main() {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+
+        if (RainBackground2.getPosition().y>WINDOW_HEIGHT){
+            RainBackground2.setPosition(0,-WINDOW_HEIGHT);
+        }
+
+        if (RainBackground1.getPosition().y>WINDOW_HEIGHT){
+            RainBackground1.setPosition(0,-WINDOW_HEIGHT);
+        }
+        RainBackground2.move(0,RAIN_SPEED);
+        RainBackground1.move(0,RAIN_SPEED);
+
+
+
+
         window.clear();
 
+        cow.position.first = rand() % 20 - 10 + cow.position.first;
+        cow.position.second = rand() % 20 - 10 + cow.position.second;
+        cow.reset_position();
+
+        pig.position.first = (rand() % 20) - 10 + pig.position.first;
+        pig.position.second = (rand() % 20) - 10 + pig.position.second;
+        pig.reset_position();
+
+        wolf.position.first = (rand() % 20) - 10 + wolf.position.first;
+        wolf.position.second = (rand() % 20) - 10 + wolf.position.second;
+        wolf.reset_position();
+
         window.draw(spriteBG);
-
-        cow.random_move(20);
-        pig.random_move(20);
-        wolf.random_move(20);
-
+        window.draw(RainBackground2);
+        window.draw(RainBackground1);
         window.draw(cow.sprite);
         window.draw(pig.sprite);
         window.draw(wolf.sprite);
-
         window.display();
     }
     return 0;
