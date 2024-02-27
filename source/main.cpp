@@ -24,6 +24,7 @@ int main() {
     Entity wolf(1, 1, 100, 120, "wolf.png");
 
     while (window.isOpen()) {
+        srand(time(0));
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
@@ -37,9 +38,9 @@ int main() {
         pig.random_move(20);
         wolf.random_move(20);
 
-        window.draw(cow.sprite);
-        window.draw(pig.sprite);
-        window.draw(wolf.sprite);
+        window.draw(cow.getSprite());
+        window.draw(pig.getSprite());
+        window.draw(wolf.getSprite());
 
         window.display();
     }
