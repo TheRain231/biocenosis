@@ -3,8 +3,7 @@
 #include "entity.h"
 using namespace std;
 
-#define FIELD_HEIGHT 15
-#define FIELD_WIDTH 15
+
 
 class Field{
 private:

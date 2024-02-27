@@ -7,6 +7,10 @@ Entity::Entity(int hp, int age, float x, float y, const string& texture_name){
     texture.loadFromFile("textures/" + texture_name);
     sprite.setTexture(texture);
     sprite.setPosition(position.first, position.second);
+
+    sprite.setScale(
+            size.x / sprite.getLocalBounds().width,
+            size.y / sprite.getLocalBounds().height);
 }
 
 void Entity::reset_position() {
@@ -21,4 +25,10 @@ void Entity::reset_position() {
         position.second = WINDOW_HEIGHT;
     }
     sprite.setPosition(position.first, position.second);
+}
+
+void Entity::random_move(int range) {
+    position.first = rand() % range - range/2 + position.first;
+    position.second = rand() % range - range/2 + position.second;
+    reset_position();
 }
