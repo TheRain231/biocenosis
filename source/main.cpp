@@ -22,7 +22,6 @@ int main() {
     Entity cow(1, 1, 100, 120, "cow.png");
     Entity pig(1, 1, 100, 120, "pig.png");
     Entity wolf(1, 1, 100, 120, "wolf.png");
-
     sf::Texture Rain1;
     Rain1.loadFromFile("../textures/rain.png");
     sf::RectangleShape RainBackground1(sf::Vector2f(WINDOW_WIDTH,WINDOW_HEIGHT));
