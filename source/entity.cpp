@@ -33,11 +33,11 @@ void Entity::random_move(int range) {
     reset_position();
 }
 
-sf::Sprite Entity::getSprite() {
+sf::Sprite Entity::getSprite() const{
     return this->sprite;
 }
 
 
-sf::Texture Entity::getTexture() {
+sf::Texture Entity::getTexture() const{
     return this->texture;
 }

@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include "field.h"
 #include "entity.h"
 #include "defines.h"
 

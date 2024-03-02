@@ -19,6 +19,6 @@ private:
 public:
     Entity(int hp, int age, float x, float y, const string& texture_name);
     void random_move(int range);
-    sf::Sprite getSprite();
-    sf::Texture getTexture();
+    sf::Sprite getSprite() const;
+    sf::Texture getTexture() const;
 };
