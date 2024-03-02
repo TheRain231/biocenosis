@@ -28,8 +28,8 @@ void Entity::reset_position() {
 }
 
 void Entity::random_move(int range) {
-    position.first = rand() % range - range/2; + position.first;
-    position.second = rand() % range - range/2; + position.second;
+    position.first = rand() % range - range/2 + position.first;
+    position.second = rand() % range - range/2 + position.second;
     reset_position();
 }
 

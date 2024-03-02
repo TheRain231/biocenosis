@@ -3,8 +3,6 @@ project(Biocenosis)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(SOURCE_FILES source/main.cpp
-        source/field.h
-        source/field.cpp
         source/entity.h
         source/entity.cpp
         source/defines.h)

@@ -53,8 +53,6 @@ int main() {
         RainBackground1.move(0,RAIN_SPEED);
 
 
-
-
         cow.random_move(20);
         pig.random_move(20);
         wolf.random_move(20);
