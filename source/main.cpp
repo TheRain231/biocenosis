@@ -8,7 +8,7 @@ int main() {
     srand(time(0));
 
     vector<vector<int>> field(WINDOW_HEIGHT, vector<int>(WINDOW_WIDTH, 0));
-    list<Entity> entities;
+    vector<Entity> entities;
 
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
 
@@ -24,9 +24,13 @@ int main() {
             bgSize.y / spriteBG.getLocalBounds().height);
     window.setFramerateLimit(FPS);
 
-    entities.emplace_back(1, 1, 100, 120, "cow.png");
-    entities.emplace_back(2, 1, 200, 120, "pig.png");
-    entities.emplace_back(3, 1, 300, 120, "wolf.png");
+
+    Entity obj1 = Entity(1, 1, 100, 120, "cow.png");
+    Entity obj2 = Entity(2, 1, 100, 120, "pig.png");
+    Entity obj3 = Entity(3, 1, 100, 120, "wolf.png");
+    entities.push_back(obj1);
+    entities.push_back(obj2);
+    entities.push_back(obj3);
 
     sf::Texture Rain1;
     Rain1.loadFromFile("../textures/rain.png");
@@ -62,9 +66,9 @@ int main() {
         window.draw(RainBackground2);
         window.draw(RainBackground1);
 
-        for (Entity entity: entities){
-            entity.random_move(20);
-            window.draw(entity.getSprite());
+        for (int i = 0 ; i < entities.size();i++){
+            entities[i].random_move(100);
+            window.draw(entities[i].getSprite());
         }
 
         window.display();
