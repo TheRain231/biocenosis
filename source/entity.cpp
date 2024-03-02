@@ -1,6 +1,7 @@
 #include "entity.h"
+#include <iostream>
 
-Entity::Entity(int hp, int age, float x, float y, const string& texture_name){
+Entity::Entity(int hp, int age, float x, float y, string texture_name){
     this->hp = hp;
     this->age = age;
     position = pair<float, float>(x, y);
@@ -35,9 +36,4 @@ void Entity::random_move(int range) {
 
 sf::Sprite Entity::getSprite() const{
     return this->sprite;
-}
-
-
-sf::Texture Entity::getTexture() const{
-    return this->texture;
 }

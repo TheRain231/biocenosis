@@ -17,8 +17,7 @@ private:
     sf::Texture texture;
     void reset_position();
 public:
-    Entity(int hp, int age, float x, float y, const string& texture_name);
+    Entity(int hp, int age, float x, float y, string texture_name);
     void random_move(int range);
     sf::Sprite getSprite() const;
-    sf::Texture getTexture() const;
 };
