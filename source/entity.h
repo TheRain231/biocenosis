@@ -9,15 +9,16 @@ using namespace std;
 
 class Entity {
 private:
-    int hp;
-    int age;
+
     pair<float, float> position;
-    const sf::Vector2<float> size = sf::Vector2f(WINDOW_HEIGHT / FIELD_HEIGHT, WINDOW_WIDTH / FIELD_WIDTH);
+    const sf::Vector2<float> size = sf::Vector2f(SPRITE_SIZE, SPRITE_SIZE);
     sf::Sprite sprite;
     sf::Texture texture;
     void reset_position();
+
 public:
-    Entity(int hp, int age, float x, float y, string texture_name);
+
+    Entity(string texture_name);
     void random_move(int range);
-    sf::Sprite getSprite() const;
+    sf::Sprite getSprite();
 };

@@ -1,11 +1,12 @@
 #include "entity.h"
 #include <iostream>
 
-Entity::Entity(int hp, int age, float x, float y, string texture_name){
-    this->hp = hp;
-    this->age = age;
+Entity::Entity(string texture_name){
+
+    int x = rand()%WINDOW_WIDTH;
+    int y = rand()%WINDOW_HEIGHT;
     position = pair<float, float>(x, y);
-    texture.loadFromFile("textures/" + texture_name);
+    texture.loadFromFile("../textures/" + texture_name);
     sprite.setTexture(texture);
     sprite.setPosition(position.first, position.second);
 
@@ -17,13 +18,13 @@ Entity::Entity(int hp, int age, float x, float y, string texture_name){
 void Entity::reset_position() {
     if (position.first < 0){
         position.first = 0;
-    } else if (position.first > WINDOW_WIDTH){
-        position.first = WINDOW_WIDTH;
+    } else if (position.first > WINDOW_WIDTH-SPRITE_SIZE){
+        position.first = WINDOW_WIDTH-SPRITE_SIZE;
     }
     if (position.second < 0){
         position.second = 0;
-    } else if (position.second > WINDOW_HEIGHT){
-        position.second = WINDOW_HEIGHT;
+    } else if (position.second > WINDOW_HEIGHT-SPRITE_SIZE){
+        position.second = WINDOW_HEIGHT-SPRITE_SIZE;
     }
     sprite.setPosition(position.first, position.second);
 }
@@ -34,6 +35,6 @@ void Entity::random_move(int range) {
     reset_position();
 }
 
-sf::Sprite Entity::getSprite() const{
+sf::Sprite Entity::getSprite(){
     return this->sprite;
 }

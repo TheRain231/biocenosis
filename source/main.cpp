@@ -15,7 +15,7 @@ int main() {
     sf::Vector2f bgSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     sf::Texture background;
-    background.loadFromFile("textures/dirt.png");
+    background.loadFromFile("../textures/dirt.png");
     sf::Sprite spriteBG;
     spriteBG.setTexture(background);
     spriteBG.setPosition(0, 0);
@@ -24,14 +24,13 @@ int main() {
             bgSize.y / spriteBG.getLocalBounds().height);
     window.setFramerateLimit(FPS);
 
-    Entity cow = Entity(1, 1, 100, 120, "cow.png");
-    Entity pig = Entity(2, 1, 100, 120, "pig.png");
-    Entity wolf = Entity(3, 1, 100, 120, "wolf.png");
-    Entity grass(0, 0, 200, 200, "grass.png");
-    entities.push_back(cow);
-    entities.push_back(pig);
-    entities.push_back(wolf);
-
+    for (int i = 0 ; i < COW_COUNT;i++){
+        entities.push_back(Entity("cow.png"));
+    }
+    for (int i = 0 ; i < PIG_COUNT;i++){
+        entities.push_back(Entity("pig.png"));
+    }
+    cout << entities.size() << endl;
 
     sf::Texture Rain1;
     Rain1.loadFromFile("../textures/rain.png");
@@ -44,7 +43,6 @@ int main() {
     sf::RectangleShape RainBackground2(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
     RainBackground2.setTexture(&Rain2);
     RainBackground1.setPosition(0, -WINDOW_HEIGHT);
-
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -71,7 +69,6 @@ int main() {
             entities[i].random_move(100);
             window.draw(entities[i].getSprite());
         }
-        window.draw(grass.getSprite());
 
         window.display();
     }
