@@ -1,9 +1,7 @@
 #include "entity.h"
 #include <iostream>
-#include <random>
 
 Entity::Entity(int hp, int age, float x, float y, string texture_name){
-    cout << "for " << this << endl;
     this->hp = hp;
     this->age = age;
     position = pair<float, float>(x, y);
@@ -27,15 +25,13 @@ void Entity::reset_position() {
     } else if (position.second > WINDOW_HEIGHT){
         position.second = WINDOW_HEIGHT;
     }
-    cout << position.first << "!" << position.second << endl;
     sprite.setPosition(position.first, position.second);
 }
 
 void Entity::random_move(int range) {
-    position.first = (rand() % range - range/2 )+ position.first;
-    position.second = (rand() % range - range/2) + position.second;
+    position.first = rand() % range - range/2 + position.first;
+    position.second = rand() % range - range/2 + position.second;
     reset_position();
-    //reset_position();
 }
 
 sf::Sprite Entity::getSprite() const{
