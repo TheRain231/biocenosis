@@ -30,7 +30,6 @@ int main() {
     for (int i = 0 ; i < PIG_COUNT;i++){
         entities.push_back(Entity("pig.png"));
     }
-    cout << entities.size() << endl;
 
     sf::Texture Rain1;
     Rain1.loadFromFile("../textures/rain.png");
@@ -65,9 +64,10 @@ int main() {
         window.draw(RainBackground2);
         window.draw(RainBackground1);
 
-        for (int i = 0; i < entities.size(); i++) {
-            entities[i].random_move(100);
-            window.draw(entities[i].getSprite());
+        for (auto & entity : entities) {
+            entity.random_move(100);
+            entity.reset_texture();
+            window.draw(entity.getSprite());
         }
 
         window.display();

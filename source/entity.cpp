@@ -1,18 +1,19 @@
 #include "entity.h"
 #include <iostream>
+#include <utility>
 
-Entity::Entity(string texture_name){
-
+Entity::Entity(string texture_name): texture_name(std::move(texture_name)){
     int x = rand()%WINDOW_WIDTH;
     int y = rand()%WINDOW_HEIGHT;
     position = pair<float, float>(x, y);
-    texture.loadFromFile("../textures/" + texture_name);
+    reset_texture();
     sprite.setTexture(texture);
     sprite.setPosition(position.first, position.second);
 
     sprite.setScale(
             size.x / sprite.getLocalBounds().width,
             size.y / sprite.getLocalBounds().height);
+
 }
 
 void Entity::reset_position() {
@@ -35,6 +36,18 @@ void Entity::random_move(int range) {
     reset_position();
 }
 
-sf::Sprite Entity::getSprite(){
-    return this->sprite;
+sf::Sprite Entity::getSprite() const{
+    return sprite;
+}
+
+/*Entity::Entity(Entity const &right) {
+    position = right.position;
+    texture = right.texture;
+    sprite = right.sprite;
+    size = right.size;
+}*/
+
+void Entity::reset_texture() {
+    texture.loadFromFile("../textures/" + texture_name);
+    sprite.setTexture(texture);
 }

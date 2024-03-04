@@ -14,11 +14,14 @@ private:
     const sf::Vector2<float> size = sf::Vector2f(SPRITE_SIZE, SPRITE_SIZE);
     sf::Sprite sprite;
     sf::Texture texture;
+    const string texture_name;
     void reset_position();
 
 public:
 
     Entity(string texture_name);
     void random_move(int range);
-    sf::Sprite getSprite();
+    void reset_texture();
+    sf::Sprite getSprite() const;
+
 };
