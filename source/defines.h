@@ -12,3 +12,5 @@
 #define COW_COUNT 10
 #define PIG_COUNT 10
 #define GRASS_COUNT 30
+
+#define DANGER_RADIUS 200

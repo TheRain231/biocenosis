@@ -5,7 +5,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(SOURCE_FILES source/main.cpp
         source/entity.h
         source/entity.cpp
-        source/defines.h)
+        source/defines.h
+        source/travoyadny.cpp
+        source/travoyadny.h
+        source/predator.cpp
+        source/predator.h)
 add_executable(Biocenosis ${SOURCE_FILES})
 
 # Добавление textures

@@ -2,12 +2,19 @@
 #include <iostream>
 #include <utility>
 
-Entity::Entity(string texture_name): texture_name(std::move(texture_name)){
-    int x = rand()%WINDOW_WIDTH;
-    int y = rand()%WINDOW_HEIGHT;
+vector<vector<int>> Entity::field = vector<vector<int>>(WINDOW_HEIGHT, vector<int>(WINDOW_WIDTH, 0));
+
+Entity::Entity(string texture_name, int id): texture_name(std::move(texture_name)){
+    int x = rand() % WINDOW_WIDTH;
+    int y = rand() % WINDOW_HEIGHT;
+    while (field[x][y] != 0){
+        x = rand() % WINDOW_WIDTH;
+        y = rand() % WINDOW_HEIGHT;
+    }
+
+    field[x][y] = id;
     position = pair<float, float>(x, y);
     reset_texture();
-    sprite.setTexture(texture);
     sprite.setPosition(position.first, position.second);
 
     sprite.setScale(
@@ -39,13 +46,6 @@ void Entity::random_move(int range) {
 sf::Sprite Entity::getSprite() const{
     return sprite;
 }
-
-/*Entity::Entity(Entity const &right) {
-    position = right.position;
-    texture = right.texture;
-    sprite = right.sprite;
-    size = right.size;
-}*/
 
 void Entity::reset_texture() {
     texture.loadFromFile("../textures/" + texture_name);

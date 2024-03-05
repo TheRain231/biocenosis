@@ -1,21 +1,23 @@
 #include <SFML/Graphics.hpp>
 #include "entity.h"
 #include "defines.h"
+#include "travoyadny.h"
+#include "predator.h"
 #include <list>
 
 
 int main() {
     srand(time(0));
 
-    vector<vector<int>> field(WINDOW_HEIGHT, vector<int>(WINDOW_WIDTH, 0));
     vector<Entity> entities;
+    int entityCounter = 0;
 
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
 
     sf::Vector2f bgSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     sf::Texture background;
-    background.loadFromFile("../textures/dirt.png");
+    background.loadFromFile("textures/dirt.png");
     sf::Sprite spriteBG;
     spriteBG.setTexture(background);
     spriteBG.setPosition(0, 0);
@@ -25,20 +27,21 @@ int main() {
     window.setFramerateLimit(FPS);
 
     for (int i = 0 ; i < COW_COUNT;i++){
-        entities.push_back(Entity("cow.png"));
+        entities.push_back(Travoyadny("cow.png", entityCounter++));
     }
+
     for (int i = 0 ; i < PIG_COUNT;i++){
-        entities.push_back(Entity("pig.png"));
+        entities.push_back(Travoyadny("pig.png", entityCounter++));
     }
 
     sf::Texture Rain1;
-    Rain1.loadFromFile("../textures/rain.png");
+    Rain1.loadFromFile("textures/rain.png");
     sf::RectangleShape RainBackground1(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
     RainBackground1.setTexture(&Rain1);
     RainBackground1.setPosition(0, 0);
 
     sf::Texture Rain2;
-    Rain2.loadFromFile("../textures/rain.png");
+    Rain2.loadFromFile("textures/rain.png");
     sf::RectangleShape RainBackground2(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
     RainBackground2.setTexture(&Rain2);
     RainBackground1.setPosition(0, -WINDOW_HEIGHT);
@@ -64,7 +67,7 @@ int main() {
         window.draw(RainBackground2);
         window.draw(RainBackground1);
 
-        for (auto & entity : entities) {
+        for (Entity& entity : entities) {
             entity.random_move(100);
             entity.reset_texture();
             window.draw(entity.getSprite());

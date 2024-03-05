@@ -16,10 +16,11 @@ private:
     sf::Texture texture;
     const string texture_name;
     void reset_position();
+    static vector<vector<int>> field;
 
 public:
 
-    Entity(string texture_name);
+    Entity(string texture_name, int id);
     void random_move(int range);
     void reset_texture();
     sf::Sprite getSprite() const;
