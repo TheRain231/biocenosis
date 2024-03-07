@@ -10,6 +10,7 @@ int main() {
     srand(time(0));
 
     vector<Entity> entities;
+    vector<Travoyadny> ebutsya;
     int entityCounter = 0;
 
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
@@ -68,7 +69,7 @@ int main() {
         window.draw(RainBackground1);
 
         for (Entity& entity : entities) {
-            entity.random_move(100);
+            entity.random_move(50);
             entity.reset_texture();
             window.draw(entity.getSprite());
         }

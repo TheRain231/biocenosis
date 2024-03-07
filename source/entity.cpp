@@ -11,8 +11,9 @@ Entity::Entity(string texture_name, int id): texture_name(std::move(texture_name
         x = rand() % WINDOW_WIDTH;
         y = rand() % WINDOW_HEIGHT;
     }
-
+    currentState = state::eat;
     field[x][y] = id;
+    this->id = id;
     position = pair<float, float>(x, y);
     reset_texture();
     sprite.setPosition(position.first, position.second);
@@ -51,3 +52,35 @@ void Entity::reset_texture() {
     texture.loadFromFile("../textures/" + texture_name);
     sprite.setTexture(texture);
 }
+
+string Entity::getTextureName() const {
+    return texture_name;
+}
+int Entity::getId() const {
+    return id;
+}
+pair<float, float> Entity::getPosition() const {
+    return position;
+}
+Entity::state Entity::getState() const {
+    return Entity::currentState;
+}
+
+int Entity::find(Entity obj1, vector<Entity> &entities) const {
+    int minId = -1;
+    float minDistant = 1000000000;
+    for (Entity& entity: entities) {
+        if (obj1.getTextureName() == entity.getTextureName() && obj1.getId()!=entity.getId() && entity.getState()!=state::ebatsa) {
+            pair<float, float> posObj1 = obj1.getPosition(), posEntity = entity.getPosition();
+            float dist = sqrt(pow(posObj1.first-posEntity.first, 2) + pow(posObj1.second-posEntity.second, 2));
+            if (dist<minDistant) {
+                minDistant = dist;
+                minId = entity.getId();
+            }
+        }
+    }
+    return minId;
+}
+
+
+
