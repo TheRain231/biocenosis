@@ -9,8 +9,8 @@
 int main() {
     srand(time(0));
 
-    vector<Entity> entities;
-    vector<Travoyadny> ebutsya;
+    vector<Alive> alives;
+    vector<Alive> ebutsya;
     int entityCounter = 0;
 
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
@@ -28,11 +28,11 @@ int main() {
     window.setFramerateLimit(FPS);
 
     for (int i = 0 ; i < COW_COUNT;i++){
-        entities.push_back(Travoyadny("cow.png", entityCounter++));
+        alives.push_back(Travoyadny("cow.png", entityCounter++));
     }
 
     for (int i = 0 ; i < PIG_COUNT;i++){
-        entities.push_back(Travoyadny("pig.png", entityCounter++));
+        alives.push_back(Travoyadny("pig.png", entityCounter++));
     }
 
     sf::Texture Rain1;
@@ -68,7 +68,7 @@ int main() {
         window.draw(RainBackground2);
         window.draw(RainBackground1);
 
-        for (Entity& entity : entities) {
+        for (Alive& entity : alives) {
             entity.random_move(50);
             entity.reset_texture();
             window.draw(entity.getSprite());
