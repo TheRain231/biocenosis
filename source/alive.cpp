@@ -52,3 +52,7 @@ void Alive::eblya(vector<Entity> &entities, std::string name, int &count) const 
 bool Alive::checkForEblya(Entity obj1, Entity obj2) const {
     return obj1.getSprite().getGlobalBounds().intersects(obj2.getSprite().getGlobalBounds());
 }
+
+void Alive::decreaseCoolDown(){
+    coolDown--;
+}

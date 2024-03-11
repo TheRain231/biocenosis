@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include "entity.h"
 #include "defines.h"
 #include "travoyadny.h"
 #include "predator.h"
@@ -70,6 +69,7 @@ int main() {
 
         for (Alive& entity : alives) {
             entity.random_move(50);
+            entity.decreaseCoolDown();
             entity.reset_texture();
             window.draw(entity.getSprite());
         }
