@@ -99,4 +99,5 @@ void Alive::move(Alive& para) {
     para.position.second = -fmod(dy, TRAVOYADNYE_SPEED) + para.position.second;
 
     reset_position();
+    para.reset_position();
 }
