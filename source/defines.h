@@ -14,3 +14,5 @@
 #define GRASS_COUNT 30
 
 #define DANGER_RADIUS 200
+
+#define CALL_DAWN_SEX 100

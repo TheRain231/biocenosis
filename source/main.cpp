@@ -9,7 +9,7 @@ int main() {
     srand(time(0));
 
     vector<Alive> alives;
-    vector<Alive> ebutsya;
+    vector<pair<Alive, Alive>> ebutsya;
     int entityCounter = 0;
 
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
@@ -33,6 +33,7 @@ int main() {
     for (int i = 0 ; i < PIG_COUNT;i++){
         alives.push_back(Travoyadny("pig.png", entityCounter++));
     }
+
 
     sf::Texture Rain1;
     Rain1.loadFromFile("textures/rain.png");
@@ -67,12 +68,54 @@ int main() {
         window.draw(RainBackground2);
         window.draw(RainBackground1);
 
-        for (Alive& entity : alives) {
-            entity.random_move(50);
-            entity.decreaseCoolDown();
-            entity.reset_texture();
-            window.draw(entity.getSprite());
+        // add Call down check
+        for (Alive &entity: alives) {
+            if (entity.checkState()) {
+                int id = entity.find(alives);
+                for (Alive &entity2: alives) {
+                    if (entity2.getId() == id) {
+                            ebutsya.push_back({entity, entity2});
+                            entity.changeStateBeforeSex(entity2);
+                            break;
+                        }
+                }
+            }
         }
+        //check for meeting ? delete + born + change state + new CD : move
+        for (pair<Alive, Alive> &bothEntity: ebutsya) {
+            if (bothEntity.first.checkForEblya(bothEntity.second)) {
+
+                bothEntity.first.eblya(alives, bothEntity.first.getTextureName(), entityCounter);
+                bothEntity.first.changeStateAfterSex(bothEntity.second);
+                //delete andrey
+                //new cd
+            }
+            else{
+                //move Andrey
+            }
+        }
+
+
+
+
+
+
+
+
+        for (Alive& entity : alives) {
+            //Add check for state
+            if (entity.checkState()) {
+                entity.random_move(50);
+                entity.decreaseCoolDown();
+                entity.reset_texture();
+                window.draw(entity.getSprite());
+            }
+
+        }
+
+
+
+
 
         window.display();
     }

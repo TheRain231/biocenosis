@@ -45,14 +45,35 @@ int Alive::find(vector<Alive> &alives) const {
     return minId;
 }
 
-void Alive::eblya(vector<Entity> &entities, std::string name, int &count) const {
+void Alive::eblya(vector<Alive> &entities, std::string name, int &count) const {
     entities.push_back(Alive(name, count++));
+    // cd write!!!
+}
+void Alive::changeStateAfterSex(Alive &obj2) {
+    this->currentState = state::eat;
+    obj2.currentState = state::eat;
+}
+void Alive::changeStateBeforeSex(Alive &obj2) {
+    this->currentState = state::ebatsa;
+    obj2.currentState = state::ebatsa;
 }
 
-bool Alive::checkForEblya(Entity obj1, Entity obj2) const {
-    return obj1.getSprite().getGlobalBounds().intersects(obj2.getSprite().getGlobalBounds());
+bool Alive::checkForEblya(Alive obj2) const {
+    return this->getSprite().getGlobalBounds().intersects(obj2.getSprite().getGlobalBounds());
 }
 
 void Alive::decreaseCoolDown(){
     coolDown--;
+}
+
+bool Alive::checkName(Alive obj2) {
+    return this->getTextureName() == obj2.getTextureName();
+}
+
+bool Alive::checkState() {
+    return this->getState() !=  state::ebatsa;
+}
+
+bool Alive::checkId(Alive obj2) {
+    return this->getId() == obj2.getId();
 }

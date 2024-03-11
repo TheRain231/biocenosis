@@ -4,20 +4,25 @@ class Alive: public Entity {
 
     int hp;
     int hunger;
-    void checkState();
     enum state{ ebatsa, eat, run };
-    int coolDown = 50;
+    int coolDown = CALL_DAWN_SEX;
 
     state currentState;
     void reset_position();
-    bool checkForEblya(Entity obj1, Entity obj2) const;
+
 
 public:
+    bool checkForEblya(Alive obj2) const;
+    bool checkState();
+    bool checkName(Alive obj1);
+    bool checkId(Alive obj2);
     Alive(string textureName, int id);
     void random_move(int range);
     state getState() const;
     int find(vector<Alive> &alives) const;
-    void eblya(vector<Entity> &entities, string name, int &count) const;
+    void eblya(vector<Alive> &entities, string name, int &count) const;
     void move();
     void decreaseCoolDown();
+    void changeStateAfterSex(Alive &obj2);
+    void changeStateBeforeSex(Alive &obj2);
 };
