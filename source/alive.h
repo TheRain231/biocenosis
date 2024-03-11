@@ -17,12 +17,14 @@ public:
     bool checkName(Alive obj1);
     bool checkId(Alive obj2);
     Alive(string textureName, int id);
+    Alive(Alive const &right);
     void random_move(int range);
     state getState() const;
     int find(vector<Alive> &alives) const;
     void eblya(vector<Alive> &entities, string name, int &count) const;
-    void move();
+    void move(Alive& para);
     void decreaseCoolDown();
+    void setDefaultCoolDown();
     void changeStateAfterSex(Alive &obj2);
     void changeStateBeforeSex(Alive &obj2);
 };

@@ -47,7 +47,6 @@ int Alive::find(vector<Alive> &alives) const {
 
 void Alive::eblya(vector<Alive> &entities, std::string name, int &count) const {
     entities.push_back(Alive(name, count++));
-    // cd write!!!
 }
 void Alive::changeStateAfterSex(Alive &obj2) {
     this->currentState = state::eat;
@@ -76,4 +75,28 @@ bool Alive::checkState() {
 
 bool Alive::checkId(Alive obj2) {
     return this->getId() == obj2.getId();
+}
+
+Alive::Alive(Alive const &right) : Entity(right.getTextureName(), right.getId()) {
+    hp = right.hp;
+    hunger = right.hp;
+}
+
+void Alive::setDefaultCoolDown() {
+    coolDown = CALL_DAWN_SEX;
+}
+
+
+void Alive::move(Alive& para) {
+    float dx = 0, dy = 0;
+    dx = (position.first + para.position.first) / 2;
+    dy = (position.second + para.position.second) / 2;
+
+    position.first = fmod(dx, TRAVOYADNYE_SPEED) + position.first;
+    position.second = fmod(dy, TRAVOYADNYE_SPEED) + position.second;
+
+    para.position.first = -fmod(dx, TRAVOYADNYE_SPEED) + para.position.first;
+    para.position.second = -fmod(dy, TRAVOYADNYE_SPEED) + para.position.second;
+
+    reset_position();
 }

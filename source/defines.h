@@ -7,6 +7,7 @@
 #define SPRITE_SIZE 50
 
 #define RAIN_SPEED 20
+#define TRAVOYADNYE_SPEED 10.0
 
 #define WOLF_COUNT 10
 #define COW_COUNT 10

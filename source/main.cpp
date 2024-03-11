@@ -87,11 +87,11 @@ int main() {
 
                 bothEntity.first.eblya(alives, bothEntity.first.getTextureName(), entityCounter);
                 bothEntity.first.changeStateAfterSex(bothEntity.second);
-                //delete andrey
-                //new cd
+                //ot andreya: delete gotov
+                //ot andreya: new cd gotov
             }
             else{
-                //move Andrey
+                //ot andreya: move gotov
             }
         }
 

@@ -38,7 +38,7 @@ string Entity::getTextureName() const {
 int Entity::getId() const {
     return id;
 }
+
 pair<float, float> Entity::getPosition() const {
     return position;
 }
-
