@@ -10,7 +10,7 @@ int main() {
     srand(time(0));
 
     vector<Alive> alives;
-    vector<pair<Alive*, Alive*>> ebutsya;
+    vector<pair<Alive&, Alive&>> ebutsya;
     vector<Grass> grass;
     int entityCounter = 0;
     int frames = 0;
@@ -64,7 +64,7 @@ int main() {
                 int id = entity.find(alives);
                 for (Alive &entity2: alives) {
                     if (entity2.getId() == id && entity2.getCoolDawn() <= 0) {
-                        ebutsya.push_back({&entity, &entity2});
+                        ebutsya.push_back({entity, entity2});
                         entity.changeStateBeforeSex(entity2);
                         break;
                     }
@@ -73,12 +73,12 @@ int main() {
         }
         //check for meeting ? delete + born + change state + new CD : move
         vector<pair<Alive&, Alive&>> ebutsya_new;
-        for (pair<Alive*, Alive*> &bothEntity: ebutsya) {
-            if (bothEntity.first->checkForEblya(bothEntity.second)) {
-                bothEntity.first.eblya(alives, bothEntity.first.getTextureName(), entityCounter);
+        for (pair<Alive&, Alive&> &bothEntity: ebutsya) {
+            if (bothEntity.first.checkForEblya(bothEntity.second)) {
                 bothEntity.first.changeStateAfterSex(bothEntity.second);
                 bothEntity.first.setDefaultCoolDown();
                 bothEntity.second.setDefaultCoolDown();
+                bothEntity.first.eblya(alives, bothEntity.first.getTextureName(), entityCounter);
             } else {
                 bothEntity.first.move(bothEntity.second);
                 ebutsya_new.push_back(bothEntity);

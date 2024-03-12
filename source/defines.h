@@ -16,7 +16,7 @@
 
 #define DANGER_RADIUS 200
 
-#define CALL_DAWN_SEX 0
+#define CALL_DAWN_SEX 20
 
 #define ALIVE_HP 100
 #define ALIVE_HUNGER 20
