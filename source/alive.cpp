@@ -43,6 +43,7 @@ int Alive::find(vector<Alive> &alives) const {
 void Alive::eblya(vector<Alive> &entities, std::string name, int &count) const {
     entities.push_back(Alive(position.first, position.second, name, count++));
 }
+
 void Alive::changeStateAfterSex(Alive &obj2) {
     this->currentState = eat;
     obj2.currentState = eat;

@@ -29,12 +29,12 @@ int main() {
             bgSize.y / spriteBG.getLocalBounds().height);
     window.setFramerateLimit(FPS);
 
-//    for (int i = 0 ; i < COW_COUNT;i++){
-//        alives.push_back(Travoyadny("cow.png", entityCounter++));
-//    }
-    for (int i = 0; i < 2; i++) {
-        alives.push_back(Alive("cow.png", entityCounter++));
+    for (int i = 0 ; i < COW_COUNT;i++){
+        alives.push_back(Travoyadny("cow.png", entityCounter++));
     }
+//    for (int i = 0; i < 2; i++) {
+//        alives.push_back(Alive("cow.png", entityCounter++));
+//    }
 
 //    for (int i = 0 ; i < PIG_COUNT;i++){
 //        alives.push_back(Travoyadny("pig.png", entityCounter++));

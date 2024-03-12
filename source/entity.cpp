@@ -42,7 +42,7 @@ sf::Sprite Entity::getSprite() const{
 }
 
 void Entity::reset_texture() {
-    texture.loadFromFile("../textures/" + texture_name);
+    texture.loadFromFile("../textures/" + this->texture_name);
     sprite.setTexture(texture);
 }
 
