@@ -4,7 +4,7 @@
 #include "predator.h"
 #include "grass.h"
 #include <list>
-
+#include "Rain.h"
 
 int main() {
     srand(time(0));
@@ -41,17 +41,8 @@ int main() {
         grass.push_back(Grass((rand()%15+1),(rand()%15+1),"grass.png"));
     }
 
-    sf::Texture Rain1;
-    Rain1.loadFromFile("../textures/rain.png");
-    sf::RectangleShape RainBackground1(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
-    RainBackground1.setTexture(&Rain1);
-    RainBackground1.setPosition(0, 0);
+    Rain Rain_background;
 
-    sf::Texture Rain2;
-    Rain2.loadFromFile("../textures/rain.png");
-    sf::RectangleShape RainBackground2(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
-    RainBackground2.setTexture(&Rain2);
-    RainBackground1.setPosition(0, -WINDOW_HEIGHT);
     while (window.isOpen()) {
         frames++;
         sf::Event event;
@@ -60,20 +51,15 @@ int main() {
                 window.close();
         }
 
-        if (RainBackground2.getPosition().y > WINDOW_HEIGHT) {
-            RainBackground2.setPosition(0, -WINDOW_HEIGHT);
-        }
-
-        if (RainBackground1.getPosition().y > WINDOW_HEIGHT) {
-            RainBackground1.setPosition(0, -WINDOW_HEIGHT);
-        }
-        RainBackground2.move(0, RAIN_SPEED);
-        RainBackground1.move(0, RAIN_SPEED);
 
         window.clear();
         window.draw(spriteBG);
-        window.draw(RainBackground2);
-        window.draw(RainBackground1);
+
+        if (Rain_background.rain_update()) {
+            Rain_background.move(RAIN_SPEED);
+            window.draw(Rain_background.get_sprite1());
+            window.draw(Rain_background.get_sprite2());
+        }
 
         // add Call down check
         for (Alive &entity: alives) {
