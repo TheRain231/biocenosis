@@ -37,14 +37,13 @@ int main() {
         alives.push_back(Travoyadny("pig.png", entityCounter++));
     }
 
-    for(int i=0;i<10;i++){
-        grass.push_back(Grass((rand()%15+1),(rand()%15+1),"grass.png"));
+    for(int i=0;i<10;i++) {
+        grass.push_back(Grass((rand() % 15 + 1), (rand() % 15 + 1), "grass.png"));
     }
 
     Rain Rain_background;
 
     while (window.isOpen()) {
-        frames++;
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
@@ -55,11 +54,6 @@ int main() {
         window.clear();
         window.draw(spriteBG);
 
-        if (Rain_background.rain_update()) {
-            Rain_background.move(RAIN_SPEED);
-            window.draw(Rain_background.get_sprite1());
-            window.draw(Rain_background.get_sprite2());
-        }
 
         // add Call down check
         for (Alive &entity: alives) {
@@ -88,21 +82,29 @@ int main() {
             }
         }
 
-        if(frames%10==0&&grass.size()<GRASS_COUNT){
+        if(frames++==Grass_Time && grass.size()<GRASS_COUNT){
             frames=0;
-            grass[(rand()%(grass.size()-1))].grow(grass);
-        }
-        for(int i=grass.size()-1;i>0;i--){
-            for(int j=i-1;j>=0;j--){
-                if(grass[i].isOverlap(grass[j])){
-                    // grass.erase(grass.end()-i); А ЗДЕСЬ КАК ТО УДАЛЯЙТЕ I-ый элемент, я ебу?
-                    break;
-                }
+            int len = grass.size();
+            for (int i = 0 ; i < len;i++) {
+                grass[i].grow(grass);
             }
+        }
+
+        if (Rain_background.get_status() && grass.size()<GRASS_COUNT){
+            grass.push_back(Grass(rand()%15+1,rand()%15+1,"grass.png"));
+        }
+
+
+        for(int i=grass.size()-1;i>0;i--){
+//            for(int j=i-1;j>=0;j--){
+//                if(grass[i].isOverlap(grass[j])){
+//                    // grass.erase(grass.end()-i); А ЗДЕСЬ КАК ТО УДАЛЯЙТЕ I-ый элемент, я ебу?
+//                    break;
+//                }
+//            }
             grass[i].reset_texture();
             window.draw(grass[i].getSprite());
         }
-        
 
 
 
@@ -117,6 +119,12 @@ int main() {
 
         }
 
+
+        if (Rain_background.rain_update()) {
+            Rain_background.move(RAIN_SPEED);
+            window.draw(Rain_background.get_sprite1());
+            window.draw(Rain_background.get_sprite2());
+        }
 
 
 

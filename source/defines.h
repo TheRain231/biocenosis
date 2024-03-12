@@ -12,7 +12,7 @@
 #define WOLF_COUNT 10
 #define COW_COUNT 10
 #define PIG_COUNT 10
-#define GRASS_COUNT 30
+#define GRASS_COUNT 100
 
 #define DANGER_RADIUS 200
 
@@ -20,3 +20,5 @@
 
 #define ALIVE_HP 100
 #define ALIVE_HUNGER 20
+
+#define Grass_Time 100

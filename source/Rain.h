@@ -9,6 +9,7 @@ public:
     sf::Sprite get_sprite2() const;
     void set_texture();
     int rain_update();
+    bool get_status() const;
 
 private:
     sf::Sprite sprite1;

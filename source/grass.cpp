@@ -21,11 +21,14 @@ void Grass::reset_texture() {
     texture.loadFromFile("../textures/" + texture_name);
     sprite.setTexture(texture);
 }
-void Grass::grow(vector<Grass> &arr){
-    if(position.first<15)arr.push_back(Grass(position.first+1,position.second,"grass.png"));
-    if(position.second<15)arr.push_back(Grass(position.first,position.second+1,"grass.png"));
-    if(position.first>0)arr.push_back(Grass(position.first-1,position.second,"grass.png"));
-    if(position.second>0)arr.push_back(Grass(position.first,position.second-1,"grass.png"));
+void Grass::grow(vector<Grass> &arr) const{
+    switch (rand()%4) {
+        case(0):if(position.first<15){arr.push_back(Grass(position.first+1,position.second,"grass.png"));break;}
+        case(1):if(position.second<15){arr.push_back(Grass(position.first,position.second+1,"grass.png"));break;}
+        case(2):if(position.first>0){arr.push_back(Grass(position.first-1,position.second,"grass.png"));break;}
+        case(3):if(position.second>0){arr.push_back(Grass(position.first,position.second-1,"grass.png"));break;}
+    }
+
 }
 bool Grass::isOverlap(const Grass& obj){
     return (position.first== obj.position.first && position.second == obj.position.second);

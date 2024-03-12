@@ -47,3 +47,7 @@ int Rain::rain_update(){
     }
     return 0;
 }
+
+bool Rain::get_status() const{
+    return rain_coldown>0;
+}

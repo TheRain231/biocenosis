@@ -19,5 +19,5 @@ public:
     sf::Sprite getSprite() const;
     void reset_texture();
     bool isOverlap(const Grass& obj);
-    void grow(vector<Grass> &arr);
+    void grow(vector<Grass> &arr) const;
 };
