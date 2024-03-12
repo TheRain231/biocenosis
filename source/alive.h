@@ -10,7 +10,7 @@ class Alive: public Entity {
     state currentState;
 
 public:
-    bool checkForEblya(Alive obj2) const;
+    bool checkForEblya(Alive &obj2) const;
     bool checkState();
     bool checkName(Alive obj1);
     bool checkId(Alive obj2);

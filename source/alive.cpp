@@ -41,7 +41,7 @@ int Alive::find(vector<Alive> &alives) const {
 }
 
 void Alive::eblya(vector<Alive> &entities, std::string name, int &count) const {
-    entities.push_back(Alive(position.first, position.second, name, count++));
+    entities.push_back(Alive(position.first, position.second, "pig.png", count++));
 }
 
 void Alive::changeStateAfterSex(Alive &obj2) {
@@ -49,13 +49,25 @@ void Alive::changeStateAfterSex(Alive &obj2) {
     obj2.currentState = eat;
 }
 void Alive::changeStateBeforeSex(Alive &obj2) {
-    this->currentState = state::ebatsa;
-    obj2.currentState = state::ebatsa;
+    this->currentState = ebatsa;
+    obj2.currentState = ebatsa;
 }
 
-bool Alive::checkForEblya(Alive obj2) const {
+bool Alive::checkForEblya(Alive &obj2) const {
     return this->getSprite().getGlobalBounds().intersects(obj2.getSprite().getGlobalBounds());
 }
+//bool Alive::checkForEblya(Alive &obj2) const {
+//    if (getPosition().first <= obj2.getPosition().first && getPosition().second <= obj2.getPosition().second){
+//        if (getPosition().first + SPRITE_SIZE >= obj2.getPosition().first && getPosition().second + SPRITE_SIZE >= obj2.getPosition().second){
+//            return true;
+//        }
+//        return false;
+//    }
+//    if (getPosition().first + SPRITE_SIZE < obj2.getPosition().first && getPosition().second + SPRITE_SIZE < obj2.getPosition().second){
+//        return true;
+//    }
+//    return false;
+//}
 
 void Alive::decreaseCoolDown(){
     coolDown--;
@@ -66,7 +78,7 @@ bool Alive::checkName(Alive obj2) {
 }
 
 bool Alive::checkState() {
-    return this->getState() !=  state::ebatsa;
+    return this->getState() !=  ebatsa;
 }
 
 bool Alive::checkId(Alive obj2) {
