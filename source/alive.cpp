@@ -72,7 +72,7 @@ bool Alive::checkId(Alive obj2) {
     return this->getId() == obj2.getId();
 }
 
-Alive::Alive(Alive const &right) : Entity(right.getTextureName(), right.getId()) {
+Alive::Alive(Alive const &right) : Entity(right.position.first, right.position.second, right.getTextureName(), right.getId()) {
     hp = right.hp;
     hunger = right.hunger;
     currentState = right.currentState;
@@ -107,7 +107,6 @@ void Alive::move(Alive& para) {
         para.position.second =  para.position.second - TRAVOYADNYE_SPEED;
 
     reset_position();
-    cout << dx << ' ' << dy << '\n';
     para.reset_position();
 }
 

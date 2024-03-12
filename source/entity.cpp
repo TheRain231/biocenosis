@@ -25,10 +25,6 @@ Entity::Entity(string texture_name, int id): texture_name(std::move(texture_name
 }
 
 Entity::Entity(float x, float y, string texture_name, int id): texture_name(std::move(texture_name)){
-    while (field[x][y] != 0){
-        x = rand() % WINDOW_WIDTH;
-        y = rand() % WINDOW_HEIGHT;
-    }
     field[x][y] = id;
     this->id = id;
     position = pair<float, float>(x, y);

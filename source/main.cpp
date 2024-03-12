@@ -32,16 +32,16 @@ int main() {
 //    for (int i = 0 ; i < COW_COUNT;i++){
 //        alives.push_back(Travoyadny("cow.png", entityCounter++));
 //    }
-    for (int i = 0 ; i < 2;i++){
-        alives.push_back(Alive(0, 0,"cow.png", entityCounter++));
+    for (int i = 0; i < 2; i++) {
+        alives.push_back(Alive("cow.png", entityCounter++));
     }
 
 //    for (int i = 0 ; i < PIG_COUNT;i++){
 //        alives.push_back(Travoyadny("pig.png", entityCounter++));
 //    }
 
-    for(int i=0;i<10;i++){
-        grass.push_back(Grass((rand()%15+1),(rand()%15+1),"grass.png"));
+    for (int i = 0; i < 10; i++) {
+        grass.push_back(Grass((rand() % 15 + 1), (rand() % 15 + 1), "grass.png"));
     }
 
     Rain Rain_background;
@@ -59,17 +59,15 @@ int main() {
         window.draw(spriteBG);
 
 
-
-
         for (Alive &entity: alives) {
-            if (entity.checkState() && entity.getCoolDawn()<=0) {
+            if (entity.checkState() && entity.getCoolDawn() <= 0) {
                 int id = entity.find(alives);
                 for (Alive &entity2: alives) {
-                    if (entity2.getId() == id && entity2.getCoolDawn()<=0) {
-                            ebutsya.push_back({entity, entity2});
-                            entity.changeStateBeforeSex(entity2);
-                            break;
-                        }
+                    if (entity2.getId() == id && entity2.getCoolDawn() <= 0) {
+                        ebutsya.push_back({entity, entity2});
+                        entity.changeStateBeforeSex(entity2);
+                        break;
+                    }
                 }
             }
         }
@@ -82,21 +80,21 @@ int main() {
                 bothEntity.first.setDefaultCoolDown();
                 bothEntity.second.setDefaultCoolDown();
             } else {
-                ebutsya_new.push_back(bothEntity);
                 bothEntity.first.move(bothEntity.second);
+                ebutsya_new.push_back(bothEntity);
             }
         }
         ebutsya.clear();
         copy(ebutsya_new.begin(), ebutsya_new.end(), back_inserter(ebutsya));
 
-        if(frames%10==0&&grass.size()<GRASS_COUNT){
-            frames=0;
-            grass[(rand()%(grass.size()-1))].grow(grass);
+        if (frames % 10 == 0 && grass.size() < GRASS_COUNT) {
+            frames = 0;
+            grass[(rand() % (grass.size() - 1))].grow(grass);
         }
 
-        for(int i=grass.size()-1;i>0;i--){
-            for(int j=i-1;j>=0;j--){
-                if(grass[i].isOverlap(grass[j])){
+        for (int i = grass.size() - 1; i > 0; i--) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (grass[i].isOverlap(grass[j])) {
                     // grass.erase(grass.end()-i); А ЗДЕСЬ КАК ТО УДАЛЯЙТЕ I-ый элемент, я ебу?
                     break;
                 }
@@ -104,21 +102,19 @@ int main() {
             grass[i].reset_texture();
             window.draw(grass[i].getSprite());
         }
-        
 
 
-
-        for (Alive& entity : alives) {
+        for (Alive &entity: alives) {
             //Add check for state
-            //if (entity.checkState()) {
-                //entity.random_move(50);
+            if (entity.checkState()) {
+            //entity.random_move(50);
                 entity.decreaseCoolDown();
                 entity.reset_texture();
-                //window.draw(entity.getSprite());
-            //}
+                window.draw(entity.getSprite());
+            }
         }
 
-        for (auto& entity : ebutsya) {
+        for (auto &entity: ebutsya) {
             //Add check for state
             //if (entity.checkState()) {
             //entity.random_move(50);
