@@ -40,14 +40,10 @@ int main() {
 //        alives.push_back(Travoyadny("pig.png", entityCounter++));
 //    }
 
-    for (int i = 0; i < 10; i++) {
-        grass.push_back(Grass((rand() % 15 + 1), (rand() % 15 + 1), "grass.png"));
-    }
 
     Rain Rain_background;
 
     while (window.isOpen()) {
-        frames++;
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
@@ -87,17 +83,21 @@ int main() {
         ebutsya.clear();
         copy(ebutsya_new.begin(), ebutsya_new.end(), back_inserter(ebutsya));
 
-        if (frames % 10 == 0 && grass.size() < GRASS_COUNT) {
-            frames = 0;
-            grass[(rand() % (grass.size() - 1))].grow(grass);
+        if (Rain_background.get_status() && grass.size()<GRASS_COUNT && frames%5==0){
+            grass.push_back(Grass(rand()%15+1,rand()%15+1));
         }
 
-        for (int i = grass.size() - 1; i > 0; i--) {
-            for (int j = i - 1; j >= 0; j--) {
-                if (grass[i].isOverlap(grass[j])) {
+        frames++;
+        for(int i = grass.size()-1; i > 0 ; i--){
+            for(int j = i + 1;j < grass.size(); j++){
+                if(grass[i].isOverlap(grass[j])){
                     // grass.erase(grass.end()-i); А ЗДЕСЬ КАК ТО УДАЛЯЙТЕ I-ый элемент, я ебу?
                     break;
                 }
+            }
+            if(frames%Grass_Time==0 && grass.size()<GRASS_COUNT){
+                frames=0;
+                grass[i].grow(grass);
             }
             grass[i].reset_texture();
             window.draw(grass[i].getSprite());
