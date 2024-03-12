@@ -32,7 +32,7 @@ Rain::Rain() {
 }
 
 void Rain::set_texture() {
-    texture.loadFromFile("textures/rain.png");
+    texture.loadFromFile("../textures/rain.png");
 }
 
 int Rain::rain_update(){
@@ -46,4 +46,8 @@ int Rain::rain_update(){
         }
     }
     return 0;
+}
+
+bool Rain::get_status() const{
+    return rain_coldown>0;
 }

@@ -15,9 +15,9 @@ private:
     const sf::Vector2<float> size = sf::Vector2f(SPRITE_SIZE, SPRITE_SIZE);
     const string texture_name;
 public:
-    Grass(int x,int y,string texture_name);
+    Grass(int x,int y);
     sf::Sprite getSprite() const;
     void reset_texture();
     bool isOverlap(const Grass& obj);
-    void grow(vector<Grass> &arr);
+    void grow(vector<Grass> &arr) const;
 };
