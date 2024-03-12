@@ -29,13 +29,16 @@ int main() {
             bgSize.y / spriteBG.getLocalBounds().height);
     window.setFramerateLimit(FPS);
 
-    for (int i = 0 ; i < COW_COUNT;i++){
+//    for (int i = 0 ; i < COW_COUNT;i++){
+//        alives.push_back(Travoyadny("cow.png", entityCounter++));
+//    }
+    for (int i = 0 ; i < 2;i++){
         alives.push_back(Travoyadny("cow.png", entityCounter++));
     }
 
-    for (int i = 0 ; i < PIG_COUNT;i++){
-        alives.push_back(Travoyadny("pig.png", entityCounter++));
-    }
+//    for (int i = 0 ; i < PIG_COUNT;i++){
+//        alives.push_back(Travoyadny("pig.png", entityCounter++));
+//    }
 
     for(int i=0;i<10;i++){
         grass.push_back(Grass((rand()%15+1),(rand()%15+1),"grass.png"));
@@ -61,12 +64,12 @@ int main() {
             window.draw(Rain_background.get_sprite2());
         }
 
-        // add Call down check
+
         for (Alive &entity: alives) {
-            if (entity.checkState()) {
+            if (entity.checkState() && entity.getCoolDawn()<=0) {
                 int id = entity.find(alives);
                 for (Alive &entity2: alives) {
-                    if (entity2.getId() == id) {
+                    if (entity2.getId() == id && entity2.getCoolDawn()<=0) {
                             ebutsya.push_back({entity, entity2});
                             entity.changeStateBeforeSex(entity2);
                             break;
@@ -75,18 +78,21 @@ int main() {
             }
         }
         //check for meeting ? delete + born + change state + new CD : move
+        vector<pair<Alive, Alive>> ebutsya_new;
         for (pair<Alive, Alive> &bothEntity: ebutsya) {
             if (bothEntity.first.checkForEblya(bothEntity.second)) {
 
                 bothEntity.first.eblya(alives, bothEntity.first.getTextureName(), entityCounter);
                 bothEntity.first.changeStateAfterSex(bothEntity.second);
-                //ot andreya: delete gotov
-                //ot andreya: new cd gotov
-            }
-            else{
-                //ot andreya: move gotov
+                bothEntity.first.setDefaultCoolDown();
+                bothEntity.second.setDefaultCoolDown();
+            } else {
+                ebutsya_new.push_back(bothEntity);
+                bothEntity.first.move(bothEntity.second);
             }
         }
+        ebutsya.clear();
+        copy(ebutsya_new.begin(), ebutsya_new.end(), back_inserter(ebutsya));
 
         if(frames%10==0&&grass.size()<GRASS_COUNT){
             frames=0;

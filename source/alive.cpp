@@ -88,7 +88,7 @@ Alive::Alive(Alive const &right) : Entity(right.getTextureName(), right.getId())
 }
 
 void Alive::setDefaultCoolDown() {
-    coolDown = CALL_DAWN_SEX;
+    this->coolDown = CALL_DAWN_SEX;
 }
 
 
@@ -105,4 +105,9 @@ void Alive::move(Alive& para) {
 
     reset_position();
     para.reset_position();
+}
+
+
+int Alive::getCoolDawn() {
+    return this->coolDown;
 }

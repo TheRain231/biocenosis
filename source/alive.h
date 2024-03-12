@@ -28,4 +28,5 @@ public:
     void setDefaultCoolDown();
     void changeStateAfterSex(Alive &obj2);
     void changeStateBeforeSex(Alive &obj2);
+    int getCoolDawn();
 };
