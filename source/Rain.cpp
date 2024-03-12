@@ -32,7 +32,7 @@ Rain::Rain() {
 }
 
 void Rain::set_texture() {
-    texture.loadFromFile("textures/rain.png");
+    texture.loadFromFile("../textures/rain.png");
 }
 
 int Rain::rain_update(){
