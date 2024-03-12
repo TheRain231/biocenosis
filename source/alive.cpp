@@ -1,8 +1,13 @@
 #include "alive.h"
 
 Alive::Alive(string textureName, int id) : Entity(textureName, id) {
-    hp = 100;
-    hunger = 20;
+    hp = ALIVE_HP;
+    hunger = ALIVE_HUNGER;
+}
+
+Alive::Alive(float x, float y, string textureName, int id) : Entity(x, y, textureName, id) {
+    hp = ALIVE_HP;
+    hunger = ALIVE_HUNGER;
 }
 
 void Alive::random_move(int range) {

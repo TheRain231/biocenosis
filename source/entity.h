@@ -25,6 +25,7 @@ protected:
 public:
     static vector<vector<int>> field;
     Entity(string texture_name, int id);
+    Entity(float x, float y, string texture_name, int id);
     void reset_texture();
     sf::Sprite getSprite() const;
     string getTextureName() const;

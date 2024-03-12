@@ -17,6 +17,7 @@ public:
     bool checkName(Alive obj1);
     bool checkId(Alive obj2);
     Alive(string textureName, int id);
+    Alive(float x, float y, string textureName, int id);
     Alive(Alive const &right);
     void random_move(int range);
     state getState() const;

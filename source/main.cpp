@@ -108,12 +108,12 @@ int main() {
 
         for (Alive& entity : alives) {
             //Add check for state
-            if (entity.checkState()) {
+            //if (entity.checkState()) {
                 entity.random_move(50);
                 entity.decreaseCoolDown();
                 entity.reset_texture();
                 window.draw(entity.getSprite());
-            }
+            //}
 
         }
 
