@@ -23,6 +23,7 @@ protected:
     pair<float, float> position;
     sf::Sprite sprite;
 public:
+    void reset_position();
     static vector<vector<int>> field;
     Entity(string texture_name, int id);
     Entity(float x, float y, string texture_name, int id);

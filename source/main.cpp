@@ -33,7 +33,7 @@ int main() {
 //        alives.push_back(Travoyadny("cow.png", entityCounter++));
 //    }
     for (int i = 0 ; i < 2;i++){
-        alives.push_back(Travoyadny("cow.png", entityCounter++));
+        alives.push_back(Alive(0, 0,"cow.png", entityCounter++));
     }
 
 //    for (int i = 0 ; i < PIG_COUNT;i++){
@@ -58,11 +58,7 @@ int main() {
         window.clear();
         window.draw(spriteBG);
 
-        if (Rain_background.rain_update()) {
-            Rain_background.move(RAIN_SPEED);
-            window.draw(Rain_background.get_sprite1());
-            window.draw(Rain_background.get_sprite2());
-        }
+
 
 
         for (Alive &entity: alives) {
@@ -81,7 +77,6 @@ int main() {
         vector<pair<Alive, Alive>> ebutsya_new;
         for (pair<Alive, Alive> &bothEntity: ebutsya) {
             if (bothEntity.first.checkForEblya(bothEntity.second)) {
-
                 bothEntity.first.eblya(alives, bothEntity.first.getTextureName(), entityCounter);
                 bothEntity.first.changeStateAfterSex(bothEntity.second);
                 bothEntity.first.setDefaultCoolDown();
@@ -98,6 +93,7 @@ int main() {
             frames=0;
             grass[(rand()%(grass.size()-1))].grow(grass);
         }
+
         for(int i=grass.size()-1;i>0;i--){
             for(int j=i-1;j>=0;j--){
                 if(grass[i].isOverlap(grass[j])){
@@ -115,16 +111,33 @@ int main() {
         for (Alive& entity : alives) {
             //Add check for state
             //if (entity.checkState()) {
-                entity.random_move(50);
+                //entity.random_move(50);
                 entity.decreaseCoolDown();
                 entity.reset_texture();
-                window.draw(entity.getSprite());
+                //window.draw(entity.getSprite());
+            //}
+        }
+
+        for (auto& entity : ebutsya) {
+            //Add check for state
+            //if (entity.checkState()) {
+            //entity.random_move(50);
+            entity.first.decreaseCoolDown();
+            entity.first.reset_texture();
+            window.draw(entity.first.getSprite());
+            entity.second.decreaseCoolDown();
+            entity.second.reset_texture();
+            window.draw(entity.second.getSprite());
             //}
 
         }
 
 
-
+        if (Rain_background.rain_update()) {
+            Rain_background.move(RAIN_SPEED);
+            window.draw(Rain_background.get_sprite1());
+            window.draw(Rain_background.get_sprite2());
+        }
 
 
         window.display();

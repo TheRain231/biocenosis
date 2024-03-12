@@ -11,6 +11,7 @@ Entity::Entity(string texture_name, int id): texture_name(std::move(texture_name
         x = rand() % WINDOW_WIDTH;
         y = rand() % WINDOW_HEIGHT;
     }
+    reset_position();
     field[x][y] = id;
     this->id = id;
     position = pair<float, float>(x, y);
@@ -58,4 +59,18 @@ int Entity::getId() const {
 
 pair<float, float> Entity::getPosition() const {
     return position;
+}
+
+void Entity::reset_position() {
+    if (position.first < 0){
+        position.first = 0;
+    } else if (position.first > WINDOW_WIDTH-SPRITE_SIZE){
+        position.first = WINDOW_WIDTH-SPRITE_SIZE;
+    }
+    if (position.second < 0){
+        position.second = 0;
+    } else if (position.second > WINDOW_HEIGHT-SPRITE_SIZE){
+        position.second = WINDOW_HEIGHT-SPRITE_SIZE;
+    }
+    sprite.setPosition(position.first, position.second);
 }

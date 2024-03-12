@@ -3,11 +3,13 @@
 Alive::Alive(string textureName, int id) : Entity(textureName, id) {
     hp = ALIVE_HP;
     hunger = ALIVE_HUNGER;
+    currentState = eat;
 }
 
 Alive::Alive(float x, float y, string textureName, int id) : Entity(x, y, textureName, id) {
     hp = ALIVE_HP;
     hunger = ALIVE_HUNGER;
+    currentState = eat;
 }
 
 void Alive::random_move(int range) {
@@ -16,19 +18,7 @@ void Alive::random_move(int range) {
     reset_position();
 }
 
-void Alive::reset_position() {
-    if (position.first < 0){
-        position.first = 0;
-    } else if (position.first > WINDOW_WIDTH-SPRITE_SIZE){
-        position.first = WINDOW_WIDTH-SPRITE_SIZE;
-    }
-    if (position.second < 0){
-        position.second = 0;
-    } else if (position.second > WINDOW_HEIGHT-SPRITE_SIZE){
-        position.second = WINDOW_HEIGHT-SPRITE_SIZE;
-    }
-    sprite.setPosition(position.first, position.second);
-}
+
 
 Alive::state Alive::getState() const {
     return Alive::currentState;
@@ -51,7 +41,7 @@ int Alive::find(vector<Alive> &alives) const {
 }
 
 void Alive::eblya(vector<Alive> &entities, std::string name, int &count) const {
-    entities.push_back(Alive(name, count++));
+    entities.push_back(Alive(position.first, position.second, name, count++));
 }
 void Alive::changeStateAfterSex(Alive &obj2) {
     this->currentState = state::eat;
@@ -84,7 +74,8 @@ bool Alive::checkId(Alive obj2) {
 
 Alive::Alive(Alive const &right) : Entity(right.getTextureName(), right.getId()) {
     hp = right.hp;
-    hunger = right.hp;
+    hunger = right.hunger;
+    currentState = right.currentState;
 }
 
 void Alive::setDefaultCoolDown() {
@@ -97,13 +88,26 @@ void Alive::move(Alive& para) {
     dx = (position.first + para.position.first) / 2;
     dy = (position.second + para.position.second) / 2;
 
-    position.first = fmod(dx, TRAVOYADNYE_SPEED) + position.first;
-    position.second = fmod(dy, TRAVOYADNYE_SPEED) + position.second;
+    if (position.first < dx)
+        position.first = TRAVOYADNYE_SPEED + position.first;
+    else
+        position.first =  position.first - TRAVOYADNYE_SPEED;
+    if (position.second < dy)
+        position.second = TRAVOYADNYE_SPEED + position.second;
+    else
+        position.second =  position.second - TRAVOYADNYE_SPEED;
 
-    para.position.first = -fmod(dx, TRAVOYADNYE_SPEED) + para.position.first;
-    para.position.second = -fmod(dy, TRAVOYADNYE_SPEED) + para.position.second;
+    if (para.position.first < dx)
+        para.position.first = TRAVOYADNYE_SPEED + para.position.first;
+    else
+        para.position.first =  para.position.first - TRAVOYADNYE_SPEED;
+    if (para.position.second < dy)
+        para.position.second = TRAVOYADNYE_SPEED + para.position.second;
+    else
+        para.position.second =  para.position.second - TRAVOYADNYE_SPEED;
 
     reset_position();
+    cout << dx << ' ' << dy << '\n';
     para.reset_position();
 }
 

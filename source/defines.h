@@ -1,5 +1,5 @@
 #define WINDOW_TITLE "Best Game"
-#define FPS 1000
+#define FPS 2
 
 #define WINDOW_WIDTH 900
 #define WINDOW_HEIGHT 900
@@ -16,7 +16,7 @@
 
 #define DANGER_RADIUS 200
 
-#define CALL_DAWN_SEX 100
+#define CALL_DAWN_SEX 0
 
 #define ALIVE_HP 100
 #define ALIVE_HUNGER 20

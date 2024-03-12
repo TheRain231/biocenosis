@@ -8,8 +8,6 @@ class Alive: public Entity {
     int coolDown = CALL_DAWN_SEX;
 
     state currentState;
-    void reset_position();
-
 
 public:
     bool checkForEblya(Alive obj2) const;
