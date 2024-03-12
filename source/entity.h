@@ -1,4 +1,8 @@
-#pragma once
+// #pragma once На linux не работает ;)
+
+#ifndef ENTITY_H
+#define ENTITY_H
+
 #include <cmath>
 #include <iostream>
 #include <vector>
@@ -27,3 +31,5 @@ public:
     int getId() const;
     pair<float, float> getPosition() const;
 };
+
+#endif
