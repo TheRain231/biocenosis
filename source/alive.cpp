@@ -44,8 +44,8 @@ void Alive::eblya(vector<Alive> &entities, std::string name, int &count) const {
     entities.push_back(Alive(position.first, position.second, name, count++));
 }
 void Alive::changeStateAfterSex(Alive &obj2) {
-    this->currentState = state::eat;
-    obj2.currentState = state::eat;
+    this->currentState = eat;
+    obj2.currentState = eat;
 }
 void Alive::changeStateBeforeSex(Alive &obj2) {
     this->currentState = state::ebatsa;
