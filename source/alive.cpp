@@ -54,7 +54,16 @@ void Alive::changeStateBeforeSex(Alive &obj2) {
 }
 
 bool Alive::checkForEblya(Alive &obj2) const {
-    return this->getSprite().getGlobalBounds().intersects(obj2.getSprite().getGlobalBounds());
+    if (getPosition().first <= obj2.getPosition().first && getPosition().second <= obj2.getPosition().second){
+        if (getPosition().first + SPRITE_SIZE >= obj2.getPosition().first && getPosition().second + SPRITE_SIZE >= obj2.getPosition().second){
+            return true;
+        }
+        return false;
+    }
+    if (getPosition().first + SPRITE_SIZE < obj2.getPosition().first && getPosition().second + SPRITE_SIZE < obj2.getPosition().second){
+        return true;
+    }
+    return false;
 }
 //bool Alive::checkForEblya(Alive &obj2) const {
 //    if (getPosition().first <= obj2.getPosition().first && getPosition().second <= obj2.getPosition().second){
@@ -78,7 +87,7 @@ bool Alive::checkName(Alive obj2) {
 }
 
 bool Alive::checkState() {
-    return this->getState() !=  ebatsa;
+    return this->getState() != ebatsa;
 }
 
 bool Alive::checkId(Alive obj2) {
