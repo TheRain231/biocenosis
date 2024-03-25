@@ -128,6 +128,11 @@ void Alive::move(Alive& para) {
     else
         para.position.second =  para.position.second - TRAVOYADNYE_SPEED;
 
+    if (abs(position.first - para.position.first) < 10 && abs(position.second - para.position.second) < 10){
+        para.position.first = position.first;
+        para.position.second = position.second;
+    }
+
     reset_position();
     para.reset_position();
 }
