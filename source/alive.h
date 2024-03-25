@@ -6,11 +6,13 @@ class Alive: public Entity {
     int hunger;
     enum state{ ebatsa, eat, run };
 
-    int coolDown = CALL_DAWN_SEX;
 
+    int coolDown = CALL_DAWN_SEX;
     state currentState;
 
+
 public:
+
     bool checkForEblya(Alive &obj2) const;
     bool checkState();
     bool checkName(Alive obj1);
@@ -28,4 +30,6 @@ public:
     void changeStateAfterSex(Alive &obj2);
     void changeStateBeforeSex(Alive &obj2);
     int getCoolDawn();
+    void printState() const;
+
 };

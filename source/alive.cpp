@@ -141,3 +141,16 @@ void Alive::move(Alive& para) {
 int Alive::getCoolDawn() {
     return this->coolDown;
 }
+
+void Alive::printState() const {
+    switch (currentState) {
+        case Alive::state::eat:
+            cout << "eat ";
+        case Alive::state::ebatsa:
+            cout << "ebatsa ";
+        case Alive::state::run:
+            cout << "run ";
+        default:
+            cout << "error ";
+    }
+}

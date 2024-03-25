@@ -10,7 +10,7 @@ int main() {
     srand(time(0));
     setlocale(LC_ALL, "Russian");
     vector<Alive> alives;
-    vector<pair<Alive&, Alive&>> ebutsya;
+    vector<pair<Alive &, Alive &>> ebutsya;
     vector<Grass> grass;
     int entityCounter = 0;
     int frames = 0;
@@ -68,8 +68,8 @@ int main() {
             }
         }
         //check for meeting ? delete + born + change state + new CD : move
-        vector<pair<Alive&, Alive&>> ebutsya_new;
-        for (pair<Alive&, Alive&> &bothEntity: ebutsya) {
+        vector<pair<Alive &, Alive &>> ebutsya_new;
+        for (pair<Alive &, Alive &> &bothEntity: ebutsya) {
             if (bothEntity.first.checkForEblya(bothEntity.second)) {
                 bothEntity.first.changeStateAfterSex(bothEntity.second);
                 bothEntity.first.setDefaultCoolDown();
@@ -87,8 +87,8 @@ int main() {
         }
 
 
-        if (Rain_background.get_status() && grass.size()<GRASS_COUNT && frames%5==0){
-            grass.push_back(Grass(rand()%15+1,rand()%15+1));
+        if (Rain_background.get_status() && grass.size() < GRASS_COUNT && frames % 5 == 0) {
+            grass.push_back(Grass(rand() % 15 + 1, rand() % 15 + 1));
         }
 
 //        frames++;
@@ -110,11 +110,10 @@ int main() {
 
         for (Alive &entity: alives) {
 
-           if (entity.checkState()) {
+            if (entity.checkState()) {
                 entity.random_move(50);
             }
-
-           cout << entity.getState() << " ";
+            entity.printState();
             entity.decreaseCoolDown();
             //entity.reset_texture();
             window.draw(entity.getSprite());
