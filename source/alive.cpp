@@ -21,7 +21,7 @@ void Alive::random_move(int range) {
 
 
 Alive::state Alive::getState() const {
-    return Alive::currentState;
+    return currentState;
 }
 
 int Alive::find(vector<Alive> &alives) const {
@@ -41,7 +41,7 @@ int Alive::find(vector<Alive> &alives) const {
 }
 
 void Alive::eblya(vector<Alive> &entities, std::string name, int &count) const {
-    entities.push_back(Alive(position.first, position.second, "pig.png", count++));
+    entities.push_back(Alive(position.first, position.second, name, count++));
 }
 
 void Alive::changeStateAfterSex(Alive &obj2) {

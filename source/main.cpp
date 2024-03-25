@@ -75,6 +75,7 @@ int main() {
                 bothEntity.first.setDefaultCoolDown();
                 bothEntity.second.setDefaultCoolDown();
                 bothEntity.first.eblya(alives, bothEntity.first.getTextureName(), entityCounter);
+
             } else {
                 bothEntity.first.move(bothEntity.second);
                 ebutsya_new.push_back(bothEntity);
@@ -108,14 +109,17 @@ int main() {
 
 
         for (Alive &entity: alives) {
-            //Add check for state
-            //if (entity.checkState()) {
+
+           if (entity.checkState()) {
                 entity.random_move(50);
-            //}
+            }
+
+           cout << entity.getState() << " ";
             entity.decreaseCoolDown();
             //entity.reset_texture();
             window.draw(entity.getSprite());
         }
+        cout << '\n';
 
 //        for (auto &entity: ebutsya) {
 //            try {

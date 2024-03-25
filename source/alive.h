@@ -5,6 +5,7 @@ class Alive: public Entity {
     int hp;
     int hunger;
     enum state{ ebatsa, eat, run };
+
     int coolDown = CALL_DAWN_SEX;
 
     state currentState;
